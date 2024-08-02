@@ -2,7 +2,7 @@ import { signal } from "@angular/core";
 
 
 
-export const productsList = signal([
+export const productsList = [
 
     {
         name : "HarryPotter 1", quantity : 2, unitPrice : 75,
@@ -26,7 +26,7 @@ export const productsList = signal([
         name : "HarryPotter 7", quantity : 5, unitPrice : 45,
     },
 
-])
+]
 
 export interface ProductList {
     name:      string;

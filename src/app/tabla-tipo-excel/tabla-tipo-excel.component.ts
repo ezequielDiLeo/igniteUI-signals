@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { Component, HostBinding, OnInit, signal, ViewChild } from '@angular/core';
 import { IgxGridComponent } from 'igniteui-angular';
 import { ProductList, productsList } from '../mock/products.mock';
 
@@ -15,7 +15,7 @@ export class TablaTipoExcelComponent implements OnInit {
     
     public grid1!: IgxGridComponent;
 
-    public data = productsList();
+    data = signal<ProductList[]>([]);
 
     public size = 'large';
     public sizes! : any[];
@@ -23,6 +23,7 @@ export class TablaTipoExcelComponent implements OnInit {
     constructor() {
     }
     public ngOnInit(): void {
+      this.data.set(productsList);
         this.sizes = [
             {
                 label: 'small',
@@ -45,6 +46,10 @@ export class TablaTipoExcelComponent implements OnInit {
     @HostBinding('style.--ig-size')
     protected get sizeStyle() {
         return `var(--ig-size-${this.size})`;
+    }
+
+    public get dataArray(): ProductList[] {
+      return this.data();
     }
 
     public selectSize(event:any) {
